@@ -3,11 +3,13 @@ import java.util.LinkedList;
 public class executeMain {
 
     public static void main(String[] args) {
-        SLList slList = new SLList();
-        slList.addLast(15);
-        System.out.println(slList.getFirst());
-        System.out.println(slList.size());
-        System.out.println(slList.getLast());
-
+        AList<Integer> aList = new AList<>();
+        aList.addLast(1);
+        aList.addLast(2);
+        aList.addLast(3);
+        aList.addLast(4);
+        aList.addFirst(5);
+        System.out.println(aList.size());
+        System.out.println(aList.toString());
     }
 }

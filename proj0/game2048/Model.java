@@ -136,7 +136,7 @@ public class Model extends Observable {
                 }
             }
         }
-
+        // after merging, move all them to fill the null in north direction
         for(int col=0;col<board.size();col++){
             for(int row = board.size()-1;row>=0;row--){
                 Tile t1 = board.tile(col,row);

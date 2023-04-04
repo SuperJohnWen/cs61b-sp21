@@ -1,6 +1,10 @@
 package deque;
 
-public class ArrayDeque<T> implements Deque<T>{
+import org.apache.commons.collections.iterators.ArrayIterator;
+
+import java.util.Iterator;
+
+public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
     private T[] items;
     private int size;
     private int nextFirst;
@@ -40,11 +44,6 @@ public class ArrayDeque<T> implements Deque<T>{
             nextLast+=1;
         }
         size+=1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     @Override
@@ -133,5 +132,59 @@ public class ArrayDeque<T> implements Deque<T>{
         items = a;
         nextFirst = items.length-1;
         nextLast = size;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == null){
+            return false;
+        }
+        if(this == o){
+            return true;
+        }
+        if(!(o instanceof ArrayDeque)){
+            return false;
+        }
+        if(o.getClass() != this.getClass()){
+            return false;
+        }
+        ArrayDeque<T> other = (ArrayDeque<T>) o;
+        if(other.size!=this.size){
+            return false;
+        }
+        for(int i=0;i<size;i++){
+            if(this.get(i)!=other.get(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<T>{
+        private int wizPos;
+
+        public ArrayDequeIterator(){
+            wizPos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            if(wizPos<size){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = get(wizPos);
+            wizPos+=1;
+            return returnItem;
+        }
     }
 }

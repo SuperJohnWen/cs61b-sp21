@@ -1,13 +1,28 @@
 public class SLList {
 
-    public IntNode headNode;
+    public static class IntNode{
+        public int item;
+        public IntNode next;
+
+        public IntNode(int i, IntNode n){
+            item = i;
+            next = n;
+        }
+
+        public void test(){
+
+        }
+
+    }
+
+    private final IntNode headNode;
     private int size;
 
-    public SLList(int x){
+    /*public SLList(int x){
         headNode = new IntNode(63,null);
         headNode.next = new IntNode(x,null);
         size=1;
-    }
+    }*/
 
     public SLList(){
         size = 0;
@@ -48,4 +63,6 @@ public class SLList {
         }
         return p.item;
     }
+
+
 }

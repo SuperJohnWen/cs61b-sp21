@@ -1,6 +1,9 @@
 package deque;
 
-public class LinkedListDeque<T> implements Deque<T>{
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T>{
+
     private class Node{
         public T item;
         Node prev;
@@ -34,10 +37,6 @@ public class LinkedListDeque<T> implements Deque<T>{
         sentinel.prev = new Node(item,sentinel.prev,sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size += 1;
-    }
-
-    public boolean isEmpty(){
-        return sentinel.next == sentinel;
     }
 
     public int size(){
@@ -94,10 +93,68 @@ public class LinkedListDeque<T> implements Deque<T>{
         return getRecursiveHelper(index,p);
     }
 
-    public T getRecursiveHelper(int index,Node p){
+    private T getRecursiveHelper(int index,Node p){
         if(index == 0){
             return p.item;
         }
         return getRecursiveHelper(index-1,p.next);
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(o==null){
+            return false;
+        }
+        if(this == o){
+            return true;
+        }
+        if(this.getClass() != o.getClass()){
+            return false;
+        }
+        if(o instanceof LinkedListDeque == false){
+            return false;
+        }
+        LinkedListDeque<T> other = (LinkedListDeque<T>) o;
+        if(other.size!=this.size){
+            return false;
+        }
+        for(int i=0;i<size;i++){
+            if(!this.get(i).equals(other.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListDequeIterator();
+    }
+
+    private class LinkedListDequeIterator implements Iterator<T>{
+
+        private Node wizPos;
+
+        public LinkedListDequeIterator(){
+            wizPos = sentinel;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            if(wizPos.next!=sentinel){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = wizPos.next.item;
+            wizPos = wizPos.next;
+            return returnItem;
+        }
+    }
+
+
 }
