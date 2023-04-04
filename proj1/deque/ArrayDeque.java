@@ -107,11 +107,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             int current;
             if (nextFirst == items.length - 1) {
                 current = 0;
-            }
-            else {
+            } else {
                 current = nextFirst + 1;
             }
-            if(current + index > items.length - 1){
+            if (current + index > items.length - 1) {
                 return items[current + index - items.length];
             }
             return items[current + index];
