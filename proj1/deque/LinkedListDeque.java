@@ -9,7 +9,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Node prev;
         Node next;
 
-        public Node(T item,Node prev,Node next) {
+        public Node(T item, Node prev, Node next) {
             this.item = item;
             this.prev = prev;
             this.next = next;
@@ -20,21 +20,21 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private int size;
 
     public LinkedListDeque() {
-        sentinel = new Node(null,null,null);
+        sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
     }
 
     public void addFirst(T item) {
-        sentinel.next = new Node(item,sentinel,sentinel.next);
+        sentinel.next = new Node(item, sentinel, sentinel.next);
         sentinel.next.prev = sentinel;
         sentinel.next.next.prev = sentinel.next;
         size += 1;
     }
 
     public void addLast(T item) {
-        sentinel.prev = new Node(item,sentinel.prev,sentinel);
+        sentinel.prev = new Node(item, sentinel.prev, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size += 1;
     }
@@ -77,7 +77,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public T get(int index) {
         if (!isEmpty() && index < size && index >= 0) {
             Node p = sentinel.next;
-            for(int i = 0; i < index; i++){
+            for (int i = 0; i < index; i++) {
                 p = p.next;
             }
             return p.item;
@@ -86,7 +86,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T getRecursive(int index) {
-        if(index < 0){
+        if (index < 0) {
             return null;
         }
         Node p = sentinel.next;
@@ -133,7 +133,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
         private Node wizPos;
 
-        public LinkedListDequeIterator() {
+        LinkedListDequeIterator() {
             wizPos = sentinel;
         }
 
