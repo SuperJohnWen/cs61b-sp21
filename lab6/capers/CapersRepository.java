@@ -1,6 +1,8 @@
 package capers;
 
 import java.io.File;
+import java.io.IOException;
+
 import static capers.Utils.*;
 
 /** A repository for Capers 
@@ -18,9 +20,10 @@ public class CapersRepository {
     static final File CWD = new File(System.getProperty("user.dir"));
 
     /** Main metadata folder. */
-    static final File CAPERS_FOLDER = null; // TODO Hint: look at the `join`
+    static final File CAPERS_FOLDER = Utils.join(CWD,".capers"); // TODO Hint: look at the `join`
                                             //      function in Utils
-
+    static final File STORY = Utils.join(CAPERS_FOLDER,"story");
+    static final File STORY_FILE = Utils.join(STORY,"story.txt");
     /**
      * Does required filesystem operations to allow for persistence.
      * (creates any necessary folders or files)
@@ -32,6 +35,24 @@ public class CapersRepository {
      */
     public static void setupPersistence() {
         // TODO
+        if (!CAPERS_FOLDER.exists()) {
+            CAPERS_FOLDER.mkdir();
+        }
+        if (!Dog.DOG_FOLDER.exists()) {
+            Dog.DOG_FOLDER.mkdir();
+        }
+        if (!STORY.exists()){
+            STORY.mkdir();
+        }
+        if(!STORY_FILE.exists()){
+            try{
+                STORY_FILE.createNewFile();
+            } catch (IOException e){
+                e.getMessage();
+            }
+
+        }
+
     }
 
     /**
@@ -40,7 +61,12 @@ public class CapersRepository {
      * @param text String of the text to be appended to the story
      */
     public static void writeStory(String text) {
-        // TODO
+        File inFile = new File(".capers/story/story.txt");
+        String content = readContentsAsString(inFile);
+        content = content.concat(text + "\n");
+        System.out.print(content);
+        File outFile = new File(".capers/story/story.txt");
+        writeContents(outFile,content);
     }
 
     /**
@@ -49,7 +75,9 @@ public class CapersRepository {
      * Also prints out the dog's information using toString().
      */
     public static void makeDog(String name, String breed, int age) {
-        // TODO
+        Dog dog = new Dog(name, breed,age);
+        System.out.print(dog.toString());
+        dog.saveDog();
     }
 
     /**
@@ -60,5 +88,9 @@ public class CapersRepository {
      */
     public static void celebrateBirthday(String name) {
         // TODO
+        Dog dog = Dog.fromFile(name);
+        dog.haveBirthday();
+        File outFile = new File(".capers/dogs/" + name);
+        writeObject(outFile,dog);
     }
 }
