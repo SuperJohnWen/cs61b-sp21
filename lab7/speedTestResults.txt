@@ -1,0 +1,11 @@
+String length:5
+-- number of insertion: 10000
+	class bstmap.ULLMap: 0.40 sec
+	class bstmap.BSTMap: 0.01 sec
+	Java's Built-in TreeMap: 0.01 sec
+	Java's Built-in HashMap: 0.01 sec
+-- number of insertion: 100000
+	--Stack Overflow -- couldn't add 100000 strings of length 5.
+	class bstmap.BSTMap: 0.12 sec
+	Java's Built-in TreeMap: 0.08 sec
+	Java's Built-in HashMap: 0.05 sec
