@@ -1,6 +1,8 @@
 package hashmap;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  *  A hash table-backed Map implementation. Provides amortized constant time
@@ -10,6 +12,42 @@ import java.util.Collection;
  *  @author YOUR NAME HERE
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
+
+    public void clear() {
+
+    }
+
+    public boolean containsKey(K key) {
+        return false;
+    }
+
+    public V get(K key) {
+        return null;
+    }
+
+    public int size() {
+        return 0;
+    }
+
+    public void put(K key, V value) {
+
+    }
+
+    public Set<K> keySet() {
+        return null;
+    }
+
+    public V remove(K key) {
+        return null;
+    }
+
+    public V remove(K key, V value) {
+        return null;
+    }
+
+    public Iterator<K> iterator() {
+        return null;
+    }
 
     /**
      * Protected helper class to store key/value pairs
